@@ -1,0 +1,28 @@
+#!/usr/bin/ruby
+
+require 'pathname'
+
+def convert_path_to_dos(path)
+    return nil unless path
+    path.gsub(/\/cygdrive\/(.)\//, '\1:\\').gsub("/", "\x5C")
+end
+
+def convert_path_to_cygwin(path)
+    return nil unless path
+    ret = path.gsub("\\", "/")
+    m = /([A-Za-z])\:/.match(ret)
+    return ret unless m
+
+    drive = m[1].downcase.gsub(':', '')
+    ret.gsub!(/[A-Za-z]\:/, "/cygdrive/#{drive}")
+    return ret
+end
+
+flags = []
+s = ENV['SDXROOT'] ? ENV['SDXROOT'].clone : '_NOTHERE'
+s = s.gsub(/[\/\\]nt$/, '')
+root = Pathname.new(s)
+root = Pathname.new(Dir.pwd) unless root.exist?
+
+`sh updatedb --localpaths='#{convert_path_to_cygwin(root.to_s)}' --output=#{convert_path_to_cygwin(root.join('locatedb').to_s)}`
+exit $?

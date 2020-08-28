@@ -1,0 +1,1 @@
+git log --pretty --numstat --summary | ~/.vim/git2cl_real

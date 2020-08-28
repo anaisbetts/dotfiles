@@ -1,0 +1,42 @@
+[user]
+name = Anaïs Betts
+email = anais@anaisbetts.org
+
+[alias]
+ci = commit -a
+co = checkout
+st = status
+praise = blame 
+pl = pull --rebase
+ff = merge --ff-only
+lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[apply]
+whitespace = strip
+
+[diff]
+color = auto
+rename = copy 
+algorithm = histogram
+
+[pager]
+color = true 
+
+[status]
+color = auto
+
+[help]
+browser = gitscm
+format = html
+
+[color]
+ui = auto
+
+[filter "lfs"]
+required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+
+[credential]
+helper = manager
