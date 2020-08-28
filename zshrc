@@ -51,6 +51,8 @@ export EDITOR="vim"
 
 export CLICOLOR="true"
 
+source "$HOME/dotfiles/zshrc_complete"
+
 source "$HOME/dotfiles/zfunctions/completion_fzf"
 source "$HOME/dotfiles/zfunctions/keybindings_fzf"
 
